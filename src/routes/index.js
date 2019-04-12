@@ -2,7 +2,7 @@ import express from 'express';
 import config from '../config';
 import middleware from '../middleware';
 import initializeDb from "../db";
-import restaurant from '../controller/restaurant';
+import foodtruck from '../controller/foodtruck';
 
 let router = express();
 
@@ -11,7 +11,7 @@ initializeDb(db => {
   // Internal MW
   router.use(middleware({config, db}));
   // Api Routes v1 (/v1)
-  router.use('/restaurant', restaurant({ config, db }));
+  router.use('/foodtruck', foodtruck({ config, db }));
 });
 
 export default router;

@@ -26,14 +26,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/radusalagean/restaurant-api.git"
+    "url": "git+https://github.com/radusalagean/foodtruck-api.git"
   },
   "author": "Radu Salagean <radusalagean@hotmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/radusalagean/restaurant-api/issues"
+    "url": "https://github.com/radusalagean/foodtruck-api/issues"
   },
-  "homepage": "https://github.com/radusalagean/restaurant-api#readme",
+  "homepage": "https://github.com/radusalagean/foodtruck-api#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
