@@ -10,11 +10,6 @@ import { generateAccessToken, respond, authenticate } from '../middleware/authMi
 export default ({ config, db }) => {
   let api = Router();
 
-  // '/v1/account'
-  api.get('/', (req, res) => {
-    res.status(200).send({ user: req.user });
-  });
-
   // '/v1/account/register'
   api.post('/register', (req, res) => {
     Account.register(new Account({
@@ -50,7 +45,7 @@ export default ({ config, db }) => {
     res.status(200).send('Logged out successfully');
   });
 
-  // '/v1/accout/me'
+  // '/v1/account/me'
   api.get('/me', authenticate, (req, res) => {
     res.status(200).json(req.user);
   });

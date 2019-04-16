@@ -13,8 +13,8 @@ export default({ config, db }) => {
     let newFoodtruck = new Foodtruck();
     newFoodtruck.name = req.body.name;
     newFoodtruck.foodtype = req.body.foodtype;
-    newFoodtruck.lat = req.body.lat;
-    newFoodtruck.long = req.body.long;
+    newFoodtruck.coordinates.lat = req.body.coordinates.lat;
+    newFoodtruck.coordinates.long = req.body.coordinates.long;
 
     newFoodtruck.save(err => {
       if (err) {
@@ -56,8 +56,8 @@ export default({ config, db }) => {
       }
       foodtruck.name = req.body.name;
       foodtruck.foodtype = req.body.foodtype;
-      foodtruck.lat = req.body.lat;
-      foodtruck.long = req.body.long;
+      foodtruck.coordinates.lat = req.body.coordinates.lat;
+      foodtruck.coordinates.long = req.body.coordinates.long;
       foodtruck.save(err => {
         if (err) {
           res.send(err);
@@ -103,6 +103,7 @@ export default({ config, db }) => {
       let newReview = new Review();
       newReview.title = req.body.title;
       newReview.text = req.body.text;
+      newReview.rating = req.body.rating;
       newReview.foodtruck = foodtruck._id;
       newReview.save((err, review) => {
         if (err) {

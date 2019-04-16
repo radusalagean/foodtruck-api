@@ -16,11 +16,11 @@ let FoodtruckSchema = new Schema({
     maxLength: [100, 'The foodtype shouldn\'t be longer than 100 characters']
   },
   coordinates: {
-    "lat": {
+    lat: {
       type: Number,
       required: true
     },
-    "long": {
+    long: {
       type: Number,
       required: true
     }
