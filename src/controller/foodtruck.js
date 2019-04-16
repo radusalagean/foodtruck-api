@@ -13,9 +13,8 @@ export default({ config, db }) => {
     let newFoodtruck = new Foodtruck();
     newFoodtruck.name = req.body.name;
     newFoodtruck.foodtype = req.body.foodtype;
-    newFoodtruck.avgcost = req.body.avgcost;
-    newFoodtruck.geometry.lat = req.body.geometry.lat;
-    newFoodtruck.geometry.long = req.body.geometry.long;
+    newFoodtruck.lat = req.body.lat;
+    newFoodtruck.long = req.body.long;
 
     newFoodtruck.save(err => {
       if (err) {
@@ -29,7 +28,7 @@ export default({ config, db }) => {
   // '/v1/foodtruck' - READ
   api.get('/', (req, res) => {
     Foodtruck.find({}, (err, foodtrucks) => {
-      if (err) {
+      if (err || foodtrucks === null) {
         res.send(err);
         return;
       }
@@ -57,9 +56,8 @@ export default({ config, db }) => {
       }
       foodtruck.name = req.body.name;
       foodtruck.foodtype = req.body.foodtype;
-      foodtruck.avgcost = req.body.avgcost;
-      foodtruck.geometry.lat = req.body.geometry.lat;
-      foodtruck.geometry.long = req.body.geometry.long;
+      foodtruck.lat = req.body.lat;
+      foodtruck.long = req.body.long;
       foodtruck.save(err => {
         if (err) {
           res.send(err);

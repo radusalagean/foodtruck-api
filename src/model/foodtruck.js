@@ -5,21 +5,24 @@ let Schema = mongoose.Schema;
 let FoodtruckSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    minLength: [1, 'The foodtruck name field shouldn\'t be empty'],
+    maxLength: [100, 'The foodtruck name shouldn\'t be longer than 100 characters']
   },
   foodtype: {
     type: String,
-    required: true
+    required: true,
+    minLength: [1, 'The foodtype field shouldn\'t be empty'],
+    maxLength: [100, 'The foodtype shouldn\'t be longer than 100 characters']
   },
-  avgcost: Number,
-  geometry: {
-    type: {
-      type: String,
-      default: 'Point'
+  coordinates: {
+    "lat": {
+      type: Number,
+      required: true
     },
-    coordinates: {
-      "lat": Number,
-      "long": Number
+    "long": {
+      type: Number,
+      required: true
     }
   },
   reviews: [{
