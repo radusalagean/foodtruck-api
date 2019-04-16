@@ -18,10 +18,15 @@ export default ({ config, db }) => {
   // '/v1/account/register'
   api.post('/register', (req, res) => {
     Account.register(new Account({
-      username: req.body.email
+      username: req.body.username
     }), req.body.password, function(err, account) {
         if (err) {
-          return res.status(500).send('An error occurred: ' + err);
+          if (err.name = 'UserExistsError') {
+            console.log('User name already exists');
+            return res.status(409).send(err);
+          } else {
+            return res.status(500).send('An error occurred: ' + err);
+          }
         }
         passport.authenticate(
           'local', {
