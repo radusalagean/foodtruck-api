@@ -2,6 +2,10 @@ import mongoose from 'mongoose';
 import { Router } from 'express';
 import Foodtruck from '../model/foodtruck';
 import Review from '../model/review';
+import {
+  readFoodtrucksAggregate,
+  readFoodtruckAggregate
+} from '../db/aggregates';
 
 import { authenticate } from '../middleware/authMiddleware';
 
@@ -27,7 +31,7 @@ export default({ config, db }) => {
 
   // '/v1/foodtruck' - READ
   api.get('/', (req, res) => {
-    Foodtruck.find({}, (err, foodtrucks) => {
+    Foodtruck.aggregate(readFoodtrucksAggregate).exec((err, foodtrucks) => {
       if (err || foodtrucks === null) {
         res.send(err);
         return;
@@ -38,7 +42,7 @@ export default({ config, db }) => {
 
   // '/v1/foodtruck/:id' - READ 1
   api.get('/:id', (req, res) => {
-    Foodtruck.findById(req.params.id, (err, foodtruck) => {
+    Foodtruck.aggregate(readFoodtruckAggregate(req.params.id)).exec((err, foodtruck) => {
       if (err) {
         res.send(err);
         return;
