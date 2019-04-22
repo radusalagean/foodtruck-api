@@ -1,8 +1,11 @@
 import jwt from 'jsonwebtoken';
 import expressJwt from 'express-jwt';
+import HttpStatus from 'http-status-codes'
+import dotenv from 'dotenv';
+dotenv.config();
 
 const TOKENTIME = 60 * 60 * 24 * 30; // 30 Days
-const SECRET = "@i gaTh D@ Pawah";
+const SECRET = process.env.PASSPORT_SECRET;
 
 let authenticate = expressJwt({ secret: SECRET });
 
@@ -17,7 +20,7 @@ let generateAccessToken = (req, res, next) => {
 }
 
 let respond = (req, res) => {
-  res.status(200).json({
+  res.status(HttpStatus.OK).json({
     user: req.user.username,
     token: req.token
   });

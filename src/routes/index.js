@@ -12,7 +12,7 @@ initializeDb(db => {
   // Internal MW
   router.use(middleware({config, db}));
   // Api Routes v1 (/v1)
-  router.use('/foodtruck', foodtruck({ config, db }));
+  router.use('/foodtrucks', foodtruck({ config, db }));
   router.use('/account', account({ config, db }));
 });
 

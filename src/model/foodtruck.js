@@ -1,19 +1,18 @@
 import mongoose from 'mongoose';
-import Review from './review';
 let Schema = mongoose.Schema;
 
 let FoodtruckSchema = new Schema({
   name: {
     type: String,
     required: true,
-    minLength: [1, 'The foodtruck name field shouldn\'t be empty'],
-    maxLength: [100, 'The foodtruck name shouldn\'t be longer than 100 characters']
+    minlength: [1, 'The foodtruck name field shouldn\'t be empty'],
+    maxlength: [100, 'The foodtruck name shouldn\'t be longer than 100 characters']
   },
   foodtype: {
     type: String,
     required: true,
-    minLength: [1, 'The foodtype field shouldn\'t be empty'],
-    maxLength: [100, 'The foodtype shouldn\'t be longer than 100 characters']
+    minlength: [1, 'The foodtype field shouldn\'t be empty'],
+    maxlength: [100, 'The foodtype shouldn\'t be longer than 100 characters']
   },
   coordinates: {
     lat: {
@@ -25,10 +24,28 @@ let FoodtruckSchema = new Schema({
       required: true
     }
   },
+  image: String,
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'Account',
+    required: true
+  },
+  created: {
+    type: Date,
+    required: true,
+    default: Date.now
+  },
+  lastUpdate: {
+    type: Date,
+    required: true,
+    default: Date.now
+  },
   reviews: [{
     type: Schema.Types.ObjectId,
     ref: 'Review'
   }]
+}, {
+  versionKey: false
 });
 
 module.exports = mongoose.model('Foodtruck', FoodtruckSchema);

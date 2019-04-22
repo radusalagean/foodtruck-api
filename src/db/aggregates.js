@@ -10,6 +10,14 @@ const readFoodtrucksAggregate = [
     }
   },
   {
+    $lookup: {
+      from: 'accounts',
+      localField: 'owner',
+      foreignField: '_id',
+      as: 'owner'
+    }
+  },
+  {
     $unwind: {
       path: '$reviews',
       preserveNullAndEmptyArrays: true
@@ -21,6 +29,13 @@ const readFoodtrucksAggregate = [
       name: { $first: '$name' },
       foodtype: { $first: '$foodtype' },
       coordinates: { $first: '$coordinates' },
+      image: { $first: '$image' },
+      owner: { $first: {
+          $arrayElemAt: [ '$owner', 0 ]
+        }
+      },
+      created: { $first: '$created' },
+      lastUpdate: { $first: '$lastUpdate' },
       avgRating: { $avg: '$reviews.rating' },
       ratingCount: {
         $sum: {
@@ -31,18 +46,25 @@ const readFoodtrucksAggregate = [
         }
       }
     }
+  },
+  {
+    $project: {
+      owner: {
+        hash: false,
+        salt: false
+      }
+    }
   }
 ];
 
-function readFoodtruckAggregate() {
-  const id = mongoose.Types.ObjectId(arguments[0]);
+function readFoodtruckAggregate(id) {
+  let objectId = mongoose.Types.ObjectId(id);
   let outputArray = readFoodtrucksAggregate.slice(0);
   outputArray.unshift({
     $match: {
-      _id: { $eq: id }
+      _id: { $eq: objectId }
     }
   });
-  console.log(outputArray);
   return outputArray;
 }
 

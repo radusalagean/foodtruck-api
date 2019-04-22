@@ -1,12 +1,12 @@
 import express from 'express';
 import http from 'http';
 import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
 import passport from 'passport';
-const LocalStrategy = require('passport-local').Strategy;
-
 import config from './config';
 import routes from './routes';
+const LocalStrategy = require('passport-local').Strategy;
+
+import { PUBLIC_ROOT_DIRECTORY } from './middleware/uploadMiddleware'
 
 let app = express();
 app.server = http.createServer(app);
@@ -30,6 +30,9 @@ passport.deserializeUser(Account.deserializeUser());
 
 // API Routes v1
 app.use('/foodtruck-api/v1', routes);
+
+// Public
+app.use(express.static(PUBLIC_ROOT_DIRECTORY));
 
 app.server.listen(config.port);
 console.log(`Started on port ${app.server.address().port}`);

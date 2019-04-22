@@ -6,14 +6,14 @@ let ReviewSchema = new Schema({
   title: {
     type: String,
     required: true,
-    minLength: [1, 'The title field shouldn\'t be empty'],
-    maxLength: [100, 'The title shouldn\'t be longer than 100 characters']
+    minlength: [1, 'The title field shouldn\'t be empty'],
+    maxlength: [100, 'The title shouldn\'t be longer than 100 characters']
   },
   text: {
     type: String,
     required: true,
-    minLength: [1, 'The review content field shouldn\'t be empty'],
-    maxLength: [1000, 'The review content shouldn\'t be longer than 1000 characters']
+    minlength: [1, 'The review content field shouldn\'t be empty'],
+    maxlength: [1000, 'The review content shouldn\'t be longer than 1000 characters']
   },
   rating: {
     type: Number,
@@ -25,7 +25,24 @@ let ReviewSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Foodtruck',
     required: true
+  },
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'Account',
+    required: true
+  },
+  created: {
+    type: Date,
+    required: true,
+    default: Date.now
+  },
+  lastUpdate: {
+    type: Date,
+    required: true,
+    default: Date.now
   }
+}, {
+  versionKey: false
 });
 
 module.exports = mongoose.model('Review', ReviewSchema);
