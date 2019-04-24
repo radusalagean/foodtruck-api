@@ -78,6 +78,11 @@ export default({ config, db }) => {
           .json(jsonMsg('Error requesting foodtruck to modify: ' + err.toString()));
         return;
       }
+      if (!foodtruck) {
+        res.status(HttpStatus.NOT_FOUND)
+          .json(jsonMsg('Foodtruck id not found'));
+          return;
+      }
       if (foodtruck.owner.toString() !== req.user.id) {
         res.status(HttpStatus.FORBIDDEN)
           .json(jsonMsg('You must be the owner of this foodtruck in order to edit its details'));
