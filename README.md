@@ -129,8 +129,8 @@ Specific restrictions:
 **Accessing profile images**
 
 In your client app, you need to build the image url as follows:
-- Full size version: `https://releasetracker.app/profile_images/:image`
-- Thumbnail (max res: 150x150): `https://releasetracker.app/profile_images/thumbnails/:image`
+- Full size version: `https://releasetracker.app/foodtruck-api-static/profile_images/:image`
+- Thumbnail (max res: 150x150): `https://releasetracker.app/foodtruck-api-static/profile_images/thumbnails/:image`
 
 ...where `:image` is the `image` field from sections 2.2 / 2.3
 
@@ -300,8 +300,8 @@ Specific restrictions:
 **Accessing foodtruck images**
 
 In your client app, you need to build the image url as follows:
-- Full size version: `https://releasetracker.app/foodtruck_images/:image`
-- Thumbnail (max res: 150x150): `https://releasetracker.app/foodtruck_images/thumbnails/:image`
+- Full size version: `https://releasetracker.app/foodtruck-api-static/foodtruck_images/:image`
+- Thumbnail (max res: 150x150): `https://releasetracker.app/foodtruck-api-static/foodtruck_images/thumbnails/:image`
 
 ...where `:image` is the `image` field from sections 2.2 / 2.3
 
