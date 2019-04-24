@@ -251,6 +251,16 @@ export default({ config, db }) => {
           .json(jsonMsg('Error while requesting the foodtruck associated with the review: ' + err.toString()));
         return;
       }
+      if (!foodtruck) {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .json(jsonMsg('No foodtruck found for the given id: ' + err.toString()));
+          return;
+      }
+      if (foodtruck.owner.toString() === req.user.id) {
+        res.status(HttpStatus.FORBIDDEN)
+          .json(jsonMsg('You cannot review your own foodtruck'));
+        return;
+      }
       Review.findOne({ author: req.user.id }, (err, review) => {
         if (err) {
           res.status(HttpStatus.INTERNAL_SERVER_ERROR)
