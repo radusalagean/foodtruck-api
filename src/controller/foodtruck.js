@@ -180,7 +180,7 @@ export default({ config, db }) => {
               .json(jsonMsg('Error while saving the image name in the database: ' + err.toString()));
             return;
           }
-          res.status(HttpStatus.OK).json(jsonMsg('Foodtruck image updated'));
+          res.status(HttpStatus.CREATED).json(jsonMsg('Foodtruck image updated'));
         });
       });
     });
