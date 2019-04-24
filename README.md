@@ -136,7 +136,7 @@ In your client app, you need to build the image url as follows:
 - Full size version: `https://releasetracker.app/foodtruck-api-static/profile_images/:image`
 - Thumbnail (max res: 150x150): `https://releasetracker.app/foodtruck-api-static/profile_images/thumbnails/:image`
 
-...where `:image` is the `image` field from sections 2.2 / 2.3
+...where `:image` is the `image` field from the account object
 
 ### 1.8 Delete profile image `🔒`
 **[<code>DELETE</code> account/image](https://releasetracker.app/foodtruck-api/v1/account/image)**
