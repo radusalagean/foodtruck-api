@@ -48,6 +48,7 @@ Specific restrictions:
 - Usernames must be unique (otherwise, `409 CONFLICT` will be returned)
 - Usernames are considered unique on a case insensitive basis (e.g. if `Tommy Vercetti` is registered, trying to register `tommy vercetti` will result in a conflict error)
 - Note: spaces are allowed in usernames
+
 ### 1.2 Login
 **[<code>POST</code> account/login](https://releasetracker.app/foodtruck-api/v1/account/login)**
 
@@ -71,6 +72,7 @@ Example Response Body **`200 OK`**:
 ```
 
 In case the username or password are not valid, `401 UNAUTHORIZED` response will be returned.
+
 ### 1.3 Logout `🔒`
 **[<code>POST</code> account/logout](https://releasetracker.app/foodtruck-api/v1/account/logout)**
 
@@ -80,6 +82,7 @@ Example Response Body **`200 OK`**:
 	"message": "Logged out successfully"
 }
 ```
+
 ### 1.4 Me `🔒`
 **[<code>GET</code> account/me](https://releasetracker.app/foodtruck-api/v1/account/me)**
 
@@ -91,6 +94,7 @@ Example Response Body **`200 OK`**:
 	"joined": "2019-04-23T20:12:46.586Z"
 }
 ```
+
 ### 1.5 Get account by id
 **[<code>GET</code> account/get/:id](https://releasetracker.app/foodtruck-api/v1/account/get/5cbf71bea8d0d843a08979f8)**
 
@@ -378,7 +382,6 @@ Example Response Body **`200 OK`**:
     }
 ]
 ```
-
 
 ### 3.3 Update review `🔒`
 **[<code>PUT</code> foodtrucks/reviews/update/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/reviews/update/5cc03f80f6805c03c8996e31)**
