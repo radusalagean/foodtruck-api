@@ -28,8 +28,8 @@ In the documentation, certain attributes displayed with a colon in the begining 
 **[<code>POST</code> account/register](https://releasetracker.app/foodtruck-api/v1/account/register)**
 
 Request Body Parameters:
-- `username` (required)
-- `password` (required)
+- `username` - *String* (required)
+- `password` - *String* (required)
 
 Example Request Body:
 ```json
@@ -52,8 +52,8 @@ Specific restrictions:
 **[<code>POST</code> account/login](https://releasetracker.app/foodtruck-api/v1/account/login)**
 
 Request Body Parameters:
-- `username` (required)
-- `password` (required)
+- `username` - *String* (required)
+- `password` - *String* (required)
 
 Example Request Body:
 ```json
@@ -110,7 +110,7 @@ Example Response Body **`200 OK`**:
 **[<code>GET</code> account/availability/:username](https://releasetracker.app/foodtruck-api/v1/account/availability/Tommy%20Vercetti)**
 
 Request URL parameters:
-- `username` (required) - Account username
+- `username` - Account username
 
 Response codes: 
 - **`200 OK`** - Username is available for registration
@@ -120,11 +120,19 @@ Response codes:
 **[<code>POST</code> account/image](https://releasetracker.app/foodtruck-api/v1/account/image)**
 
 Request Body Parameters:
-- `image` (required) - Image file
+- `image` - *File* (required) - Image file
 
 Specific restrictions:
 - Max file size is 10MB
 - Accepted MIME types: `image/jpeg`, `image/png`
+
+**Accessing profile images**
+
+In your client app, you need to build the image url as follows:
+- Full size version: `https://releasetracker.app/profile_images/:image`
+- Thumbnail (max res: 150x150): `https://releasetracker.app/profile_images/thumbnails/:image`
+
+...where `:image` is the `image` field from sections 2.2 / 2.3
 
 ### 1.8 Delete profile image `🔒 Authenticated`
 **[<code>DELETE</code> account/image](https://releasetracker.app/foodtruck-api/v1/account/image)**
@@ -134,11 +142,11 @@ Specific restrictions:
 **[<code>POST</code> foodtrucks/add](https://releasetracker.app/foodtruck-api/v1/foodtrucks/add)**
 
 Request Body Parameters:
-- `name` (required)
-- `foodtype` (required)
-- `coordinates` (required)
-	- `lat` (required)
-	- `long` (required)
+- `name` - *String* (required)
+- `foodtype` - *String* (required)
+- `coordinates` - *Object* (required)
+	- `lat` - *Number* (required)
+	- `long` - *Number* (required)
 
 Example Request Body:
 ```json
@@ -176,16 +184,16 @@ Example Response Body **`200 OK`**:
             "lat": 25.789603494529825,
             "long": -80.18718123435976
         },
-        "image": null,
+        "image": "foodtruck-image-5cbf6cfea8d0d843a08979f7.jpg",
         "owner": {
             "_id": "5cbf6c56a8d0d843a08979f5",
-            "username": "TestUser",
+            "username": "Tommy Vercetti",
             "joined": "2019-04-23T19:49:42.375Z"
         },
         "created": "2019-04-23T19:52:30.072Z",
         "lastUpdate": "2019-04-23T19:52:30.072Z",
-        "avgRating": null,
-        "ratingCount": 0
+        "avgRating": 5,
+        "ratingCount": 1
     }
 ]
 ```
@@ -206,7 +214,7 @@ Example Response Body **`200 OK`**:
         "lat": 25.789603494529825,
         "long": -80.18718123435976
     },
-    "image": null,
+    "image": "foodtruck-image-5cbf6cfea8d0d843a08979f7.jpg",
     "owner": {
         "_id": "5cbf6c56a8d0d843a08979f5",
         "username": "TestUser",
@@ -214,8 +222,8 @@ Example Response Body **`200 OK`**:
     },
     "created": "2019-04-23T19:52:30.072Z",
     "lastUpdate": "2019-04-23T19:52:30.072Z",
-    "avgRating": null,
-    "ratingCount": 0
+    "avgRating": 5,
+    "ratingCount": 1
 }
 ```
 
@@ -226,11 +234,11 @@ Request URL Parameters:
 - `id` (required) - Foodtruck id
 
 Request Body Parameters:
-- `name` (required)
-- `foodtype` (required)
-- `coordinates` (required)
-	- `lat` (required)
-	- `long` (required)
+- `name` - *String* (required)
+- `foodtype` - *String* (required)
+- `coordinates` - *Object* (required)
+	- `lat` - *Number* (required)
+	- `long` - *Number* (required)
 
 Example Request Body:
 ```json
@@ -259,6 +267,7 @@ Example Response Body **`403 FORBIDDEN`**:
 ```
 
 Specific restrictions:
+- Restrictions from section 2.1 apply
 - You must be authenticated as the owner of this foodtruck in order to edit it. Otherwise, `403 FORBIDDEN` will be returned.
 
 ### 2.5 Delete foodtruck `🔒 Authenticated`
@@ -278,18 +287,136 @@ Specific restrictions:
 - You must be authenticated as the owner of this foodtruck in order to remove it. Otherwise, `403 FORBIDDEN` will be returned.
 
 ### 2.6 Upload foodtruck image `🔒 Authenticated`
-**[<code>PUT</code> foodtrucks/image/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/image/5cbf6cfea8d0d843a08979f7)**
+**[<code>POST</code> foodtrucks/image/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/image/5cbf6cfea8d0d843a08979f7)**
 
 Request Body Parameters:
-- `image` (required) - Image file
+- `image` - *File* (required) - Image file
 
 Specific restrictions:
 - Max file size is 10MB
 - Accepted MIME types: `image/jpeg`, `image/png`
 - You must be authenticated as the owner of this foodtruck in order to upload an image for it. Otherwise, `403 FORBIDDEN` will be returned.
 
+**Accessing foodtruck images**
+
+In your client app, you need to build the image url as follows:
+- Full size version: `https://releasetracker.app/foodtruck_images/:image`
+- Thumbnail (max res: 150x150): `https://releasetracker.app/foodtruck_images/thumbnails/:image`
+
+...where `:image` is the `image` field from sections 2.2 / 2.3
+
 ### 2.7 Delete foodtruck image `🔒 Authenticated`
 **[<code>DELETE</code> foodtrucks/image/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/image/5cbf6cfea8d0d843a08979f7)**
 
 Specific restrictions:
 - You must be authenticated as the owner of this foodtruck in order to remove its image. Otherwise, `403 FORBIDDEN` will be returned.
+
+## 3. Reviews 📝
+### 3.1 Add review `🔒 Authenticated`
+**[<code>POST</code> foodtrucks/reviews/add/:foodtruck_id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/reviews/add/5cbf6cfea8d0d843a08979f7)**
+
+Request URL Parameters:
+- `foodtruck_id` (required) - Foodtruck id
+
+Request Body Parameters:
+- `title` - *String* (required)
+- `text` - *String* (optional)
+- `rating` - *Number* (required)
+
+Example Request Body:
+```json
+{
+	"title": "Best ice cream in town",
+	"text": "Even the VCPD wants to get some :D",
+	"rating": 5
+}
+```
+
+Example Response Body **`201 CREATED`**:
+```json
+{
+    "message": "Review added successfully"
+}
+```
+
+Example Response Body **`403 FORBIDDEN`**
+```json
+{
+    "message": "You already have a review submitted, please edit or remove it instead"
+}
+```
+
+Specific restrictions:
+- `title` max length: 100 characters
+- `text` max length: 1000 characters
+- `rating` *Number* in the 1-5 range
+- You can't add a review for your own foodtrucks, otherwise `403 FORBIDDEN` will be returned
+- You can't add more than one review per foodtruck, otherwise `403 FORBIDDEN` will be returned
+
+### 3.2 Get all reviews for foodtruck id
+**[<code>GET</code> foodtrucks/reviews/get/:foodtruck_id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/reviews/get/5cbf6cfea8d0d843a08979f7)**
+
+Request URL Parameters:
+- `foodtruck_id` (required) - Foodtruck id
+
+Example Response Body **`200 OK`**:
+```json
+[
+    {
+        "_id": "5cc03f80f6805c03c8996e31",
+        "created": "2019-04-24T10:50:40.920Z",
+        "lastUpdate": "2019-04-24T10:50:40.920Z",
+        "title": "Best ice cream in town",
+        "text": "Even the VCPD wants to get some :D",
+        "rating": 5,
+        "foodtruck": "5cbf6cfea8d0d843a08979f7",
+        "author": {
+            "_id": "5cbf71bea8d0d843a08979f9",
+            "username": "Lance Vance",
+            "joined": "2019-04-23T20:12:46.586Z"
+        }
+    }
+]
+```
+
+
+### 3.3 Update review `🔒 Authenticated`
+**[<code>PUT</code> foodtrucks/reviews/update/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/reviews/update/5cc03f80f6805c03c8996e31)**
+
+Request URL Parameters:
+- `id` (required) - Review id
+
+Request Body Parameters:
+- `title` - *String* (required)
+- `text` - *String* (optional)
+- `rating` - *Number* (required)
+
+Example Request Body:
+```json
+{
+	"title": "Oh, well",
+	"text": "It's not as good as it's hyped up to be. I think the owner is hiding something shady.",
+	"rating": 2
+}
+```
+
+Example Response Body **`200 OK`**:
+```json
+{
+    "message": "Review updated"
+}
+```
+
+Specific restrictions:
+- Parameter restrictions from section 3.1 apply
+- You must be authenticated as the author of this review in order to edit it. Otherwise, `403 FORBIDDEN` will be returned.
+
+### 3.4 Delete Review `🔒 Authenticated`
+**[<code>DELETE</code> foodtrucks/reviews/delete/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/reviews/delete/5cc03f80f6805c03c8996e31)**
+
+
+Request URL Parameters:
+- `id` (required) - Review id
+
+Specfic restrictions:
+- You must be authenticated as the author of this review in order to remove it. Otherwise, `403 FORBIDDEN` will be returned.
