@@ -13,7 +13,7 @@ Building on that base, the following features have been added:
 ## Usage
 Base URL: `https://releasetracker.app/foodtruck-api/v1/`
 
-For requests marked as `🔒 Authenticated`, you need to have the `Authorization` header set with the value built as `Bearer {token}`, where `{token}` is the token received with the login call.
+For requests marked as `🔒`, you need to have the `Authorization` header set with the value built as `Bearer {token}`, where `{token}` is the token received with the login call.
 
 For all POST / PUT requests that have a json body provided, you need to set the `application/json` value for the `Content-Type` header.
 
@@ -23,7 +23,7 @@ Tokens have a lifetime of 30 days, after which they will expire and a new token 
 
 In the documentation, certain attributes displayed with a colon in the begining (e.g. `:id`) need to be replaced with a corresponding value when you are making the call.
 
-## 1. Accounts 👤
+## 1. Accounts `👤`
 ### 1.1 Register 
 **[<code>POST</code> account/register](https://releasetracker.app/foodtruck-api/v1/account/register)**
 
@@ -71,7 +71,7 @@ Example Response Body **`200 OK`**:
 ```
 
 In case the username or password are not valid, `401 UNAUTHORIZED` response will be returned.
-### 1.3 Logout `🔒 Authenticated`
+### 1.3 Logout `🔒`
 **[<code>POST</code> account/logout](https://releasetracker.app/foodtruck-api/v1/account/logout)**
 
 Example Response Body **`200 OK`**:
@@ -80,7 +80,7 @@ Example Response Body **`200 OK`**:
 	"message": "Logged out successfully"
 }
 ```
-### 1.4 Me `🔒 Authenticated`
+### 1.4 Me `🔒`
 **[<code>GET</code> account/me](https://releasetracker.app/foodtruck-api/v1/account/me)**
 
 Example Response Body **`200 OK`**:
@@ -116,7 +116,7 @@ Response codes:
 - **`200 OK`** - Username is available for registration
 - **`409 CONFLICT`** - Username is unavailable for registration
 
-### 1.7 Upload profile image `🔒 Authenticated`
+### 1.7 Upload profile image `🔒`
 **[<code>POST</code> account/image](https://releasetracker.app/foodtruck-api/v1/account/image)**
 
 Request Body Parameters:
@@ -134,11 +134,11 @@ In your client app, you need to build the image url as follows:
 
 ...where `:image` is the `image` field from sections 2.2 / 2.3
 
-### 1.8 Delete profile image `🔒 Authenticated`
+### 1.8 Delete profile image `🔒`
 **[<code>DELETE</code> account/image](https://releasetracker.app/foodtruck-api/v1/account/image)**
 
-## 2. Foodtrucks 🚚
-### 2.1 Add foodtruck `🔒 Authenticated`
+## 2. Foodtrucks `🚚`
+### 2.1 Add foodtruck `🔒`
 **[<code>POST</code> foodtrucks/add](https://releasetracker.app/foodtruck-api/v1/foodtrucks/add)**
 
 Request Body Parameters:
@@ -227,7 +227,7 @@ Example Response Body **`200 OK`**:
 }
 ```
 
-### 2.4 Update foodtruck `🔒 Authenticated`
+### 2.4 Update foodtruck `🔒`
 **[<code>PUT</code> foodtrucks/update/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/update/5cbf6cfea8d0d843a08979f7)**
 
 Request URL Parameters:
@@ -270,7 +270,7 @@ Specific restrictions:
 - Restrictions from section 2.1 apply
 - You must be authenticated as the owner of this foodtruck in order to edit it. Otherwise, `403 FORBIDDEN` will be returned.
 
-### 2.5 Delete foodtruck `🔒 Authenticated`
+### 2.5 Delete foodtruck `🔒`
 **[<code>DELETE</code> foodtrucks/delete/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/delete/5cbf6cfea8d0d843a08979f7)**
 
 Request URL Parameters:
@@ -286,7 +286,7 @@ Example Response Body **`200 OK`**:
 Specific restrictions:
 - You must be authenticated as the owner of this foodtruck in order to remove it. Otherwise, `403 FORBIDDEN` will be returned.
 
-### 2.6 Upload foodtruck image `🔒 Authenticated`
+### 2.6 Upload foodtruck image `🔒`
 **[<code>POST</code> foodtrucks/image/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/image/5cbf6cfea8d0d843a08979f7)**
 
 Request Body Parameters:
@@ -305,14 +305,14 @@ In your client app, you need to build the image url as follows:
 
 ...where `:image` is the `image` field from sections 2.2 / 2.3
 
-### 2.7 Delete foodtruck image `🔒 Authenticated`
+### 2.7 Delete foodtruck image `🔒`
 **[<code>DELETE</code> foodtrucks/image/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/image/5cbf6cfea8d0d843a08979f7)**
 
 Specific restrictions:
 - You must be authenticated as the owner of this foodtruck in order to remove its image. Otherwise, `403 FORBIDDEN` will be returned.
 
-## 3. Reviews 📝
-### 3.1 Add review `🔒 Authenticated`
+## 3. Reviews `📝`
+### 3.1 Add review `🔒`
 **[<code>POST</code> foodtrucks/reviews/add/:foodtruck_id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/reviews/add/5cbf6cfea8d0d843a08979f7)**
 
 Request URL Parameters:
@@ -380,7 +380,7 @@ Example Response Body **`200 OK`**:
 ```
 
 
-### 3.3 Update review `🔒 Authenticated`
+### 3.3 Update review `🔒`
 **[<code>PUT</code> foodtrucks/reviews/update/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/reviews/update/5cc03f80f6805c03c8996e31)**
 
 Request URL Parameters:
@@ -411,7 +411,7 @@ Specific restrictions:
 - Parameter restrictions from section 3.1 apply
 - You must be authenticated as the author of this review in order to edit it. Otherwise, `403 FORBIDDEN` will be returned.
 
-### 3.4 Delete Review `🔒 Authenticated`
+### 3.4 Delete Review `🔒`
 **[<code>DELETE</code> foodtrucks/reviews/delete/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/reviews/delete/5cc03f80f6805c03c8996e31)**
 
 
