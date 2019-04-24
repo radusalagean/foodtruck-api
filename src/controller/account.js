@@ -23,9 +23,24 @@ export default ({ config, db }) => {
 
   // '/v1/account/register'
   api.post('/register', (req, res) => {
-    Account.register(new Account({
-      username: req.body.username
-    }), req.body.password, function(err, account) {
+    Account.findOne({
+      username: {
+        $regex: new RegExp(req.params.username, 'i')
+      }
+    }, (err, user) => {
+      if (err) {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .json(jsonMsg('Error while searching for the specified account: ' + err.toString()));
+        return;
+      }
+      if (user) {
+        res.status(HttpStatus.CONFLICT)
+          .json(jsonMsg('The username already exists'));
+        return;
+      }
+      Account.register(new Account({
+        username: req.body.username
+      }), req.body.password, function (err, account) {
         if (err) {
           if (err.name == 'UserExistsError') {
             return res.status(HttpStatus.CONFLICT)
@@ -42,8 +57,9 @@ export default ({ config, db }) => {
             res.status(HttpStatus.CREATED)
               .json(jsonMsg('New account created successfully'));
           });
-        });
       });
+    });
+  });
 
   // '/v1/account/login'
   api.post('/login', passport.authenticate(
@@ -88,7 +104,21 @@ export default ({ config, db }) => {
       }
       res.status(HttpStatus.OK).json(user);
     })
-  })
+  });
+
+  // '/v1/account/availability/:username'
+  api.get('/availability/:username', (req, res) => {
+    Account.findOne({ username: {
+      $regex : new RegExp(req.params.username, 'i')
+    } }, (err, user) => {
+      if (err) {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .json(jsonMsg('Error while searching for the specified account: ' + err.toString()));
+        return;
+      }
+      res.status(user ? HttpStatus.CONFLICT : HttpStatus.OK).send();
+    });
+  });
 
   // '/v1/account/image'
   api.post('/image', authenticate, (req, res) => {
