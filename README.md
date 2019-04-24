@@ -268,7 +268,7 @@ Example Response Body **`403 FORBIDDEN`**:
 
 Specific restrictions:
 - Restrictions from section 2.1 apply
-- You must be authenticated as the owner of this foodtruck in order to edit it. Otherwise, `403 FORBIDDEN` will be returned.
+- You must be authenticated as the owner of the foodtruck in order to edit it. Otherwise, `403 FORBIDDEN` will be returned.
 
 ### 2.5 Delete foodtruck `🔒`
 **[<code>DELETE</code> foodtrucks/delete/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/delete/5cbf6cfea8d0d843a08979f7)**
@@ -284,7 +284,7 @@ Example Response Body **`200 OK`**:
 ```
 
 Specific restrictions:
-- You must be authenticated as the owner of this foodtruck in order to remove it. Otherwise, `403 FORBIDDEN` will be returned.
+- You must be authenticated as the owner of the foodtruck in order to remove it. Otherwise, `403 FORBIDDEN` will be returned.
 
 ### 2.6 Upload foodtruck image `🔒`
 **[<code>POST</code> foodtrucks/image/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/image/5cbf6cfea8d0d843a08979f7)**
@@ -295,7 +295,7 @@ Request Body Parameters:
 Specific restrictions:
 - Max file size is 10MB
 - Accepted MIME types: `image/jpeg`, `image/png`
-- You must be authenticated as the owner of this foodtruck in order to upload an image for it. Otherwise, `403 FORBIDDEN` will be returned.
+- You must be authenticated as the owner of the foodtruck in order to upload an image for it. Otherwise, `403 FORBIDDEN` will be returned.
 
 **Accessing foodtruck images**
 
@@ -309,7 +309,7 @@ In your client app, you need to build the image url as follows:
 **[<code>DELETE</code> foodtrucks/image/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/image/5cbf6cfea8d0d843a08979f7)**
 
 Specific restrictions:
-- You must be authenticated as the owner of this foodtruck in order to remove its image. Otherwise, `403 FORBIDDEN` will be returned.
+- You must be authenticated as the owner of the foodtruck in order to remove its image. Otherwise, `403 FORBIDDEN` will be returned.
 
 ## 3. Reviews `📝`
 ### 3.1 Add review `🔒`
@@ -409,7 +409,7 @@ Example Response Body **`200 OK`**:
 
 Specific restrictions:
 - Parameter restrictions from section 3.1 apply
-- You must be authenticated as the author of this review in order to edit it. Otherwise, `403 FORBIDDEN` will be returned.
+- You must be authenticated as the author of the review in order to edit it. Otherwise, `403 FORBIDDEN` will be returned.
 
 ### 3.4 Delete Review `🔒`
 **[<code>DELETE</code> foodtrucks/reviews/delete/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/reviews/delete/5cc03f80f6805c03c8996e31)**
@@ -419,4 +419,4 @@ Request URL Parameters:
 - `id` (required) - Review id
 
 Specfic restrictions:
-- You must be authenticated as the author of this review in order to remove it. Otherwise, `403 FORBIDDEN` will be returned.
+- You must be authenticated as the author of the review in order to remove it. Otherwise, `403 FORBIDDEN` will be returned.
