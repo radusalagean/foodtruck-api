@@ -25,7 +25,7 @@ export default ({ config, db }) => {
   api.post('/register', (req, res) => {
     Account.findOne({
       username: {
-        $regex: new RegExp(req.params.username, 'i')
+        $regex: new RegExp(req.body.username, 'i')
       }
     }, (err, user) => {
       if (err) {
