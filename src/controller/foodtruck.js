@@ -258,7 +258,7 @@ export default({ config, db }) => {
       }
       if (!foodtruck) {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR)
-            .json(jsonMsg('No foodtruck found for the given id: ' + err.toString()));
+            .json(jsonMsg('No foodtruck found for the given id'));
           return;
       }
       if (foodtruck.owner.toString() === req.user.id) {
