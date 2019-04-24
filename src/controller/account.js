@@ -27,7 +27,7 @@ export default ({ config, db }) => {
       username: req.body.username
     }), req.body.password, function(err, account) {
         if (err) {
-          if (err.name = 'UserExistsError') {
+          if (err.name == 'UserExistsError') {
             return res.status(HttpStatus.CONFLICT)
               .json(jsonMsg('Error while registering: ' + err.toString()));
           } else {
