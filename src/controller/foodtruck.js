@@ -247,6 +247,27 @@ export default({ config, db }) => {
     });
   });
 
+  // Get authenticated user's review for a specific foodtruck id
+  // '/v1/foodtrucks/reviews/get/own/:foodtruck_id
+  api.get('/reviews/get/my/:foodtruck_id', authenticate, (req, res) => {
+    Review.findOne({
+      foodtruck: req.params.foodtruck_id,
+      author: req.user.id
+    }, (err, review) => {
+      if (err) {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .json(jsonMsg('Error while requesting your review for the specified foodtruck: ' + err.toString()))
+        return;
+      }
+      if (!review) {
+        res.status(HttpStatus.NOT_FOUND)
+          .json(jsonMsg('No review was added from your account for this foodtruck'));
+          return;
+      }
+      res.status(HttpStatus.OK).json(review);
+    })
+  })
+
   // Add review for a specific foodtruck id
   // '/v1/foodtrucks/reviews/add/:foodtruck_id'
   api.post('/reviews/add/:foodtruck_id', authenticate, (req, res) => {
