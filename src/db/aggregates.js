@@ -27,7 +27,7 @@ const readFoodtrucksAggregate = [
     $group: {
       _id: '$_id',
       name: { $first: '$name' },
-      foodtype: { $first: '$foodtype' },
+      foodtypes: { $first: '$foodtypes' },
       coordinates: { $first: '$coordinates' },
       image: { $first: '$image' },
       owner: { $first: {

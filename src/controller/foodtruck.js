@@ -28,7 +28,7 @@ export default({ config, db }) => {
   api.post('/add', authenticate, (req, res) => {
     let newFoodtruck = new Foodtruck();
     newFoodtruck.name = req.body.name;
-    newFoodtruck.foodtype = req.body.foodtype;
+    newFoodtruck.foodtypes = req.body.foodtypes;
     newFoodtruck.coordinates.lat = req.body.coordinates.lat;
     newFoodtruck.coordinates.long = req.body.coordinates.long;
     newFoodtruck.owner = req.user.id;
@@ -89,7 +89,7 @@ export default({ config, db }) => {
         return;
       }
       foodtruck.name = req.body.name;
-      foodtruck.foodtype = req.body.foodtype;
+      foodtruck.foodtypes = req.body.foodtypes;
       foodtruck.coordinates.lat = req.body.coordinates.lat;
       foodtruck.coordinates.long = req.body.coordinates.long;
       foodtruck.lastUpdate = Date.now();
