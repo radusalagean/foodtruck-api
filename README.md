@@ -8,6 +8,7 @@ Building on that base, the following features have been added:
 - Rating support for reviews
 - Queries for foodtrucks return average rating and rating count, based on the associated reviews
 - Ownership for submitted foodtruck and review entities (Only the original authors can edit or remove them)
+- Support for multiple foodtypes per foodtruck
 - Other improvements
 
 ## Usage
@@ -147,7 +148,7 @@ In your client app, you need to build the image url as follows:
 
 Request Body Parameters:
 - `name` - *String* (required)
-- `foodtype` - *String* (required)
+- `foodtypes` - *[String]* (required)
 - `coordinates` - *Object* (required)
 	- `lat` - *Number* (required)
 	- `long` - *Number* (required)
@@ -155,8 +156,10 @@ Request Body Parameters:
 Example Request Body:
 ```json
 {
-	"name": "Cherry Popper",
-	"foodtype": "Ice Cream",
+	"name": "Mr Whoopee",
+	"foodtypes": [
+		"Ice Cream"
+	]
 	"coordinates": {
 		"lat": 25.789603494529825,
 		"long": -80.18718123435976
@@ -172,7 +175,11 @@ Example Response Body **`201 CREATED`**:
 
 Specific restrictions:
 - `name` max length: 100 characters
-- `foodtype` max length: 100 characters
+- `foodtypes':
+	- min array size: 1
+	- max array size: 10
+	- min item length: 1
+	- max item length: 50
 
 ### 2.2 Get all foodtrucks
 **[<code>GET</code> foodtrucks/get](https://releasetracker.app/foodtruck-api/v1/foodtrucks/get)**
@@ -182,8 +189,10 @@ Example Response Body **`200 OK`**:
 [
     {
         "_id": "5cbf6cfea8d0d843a08979f7",
-        "name": "Cherry Popper",
-        "foodtype": "Ice Cream",
+        "name": "Mr Whoopee",
+        "foodtypes": [
+			"Ice Cream"
+		]
         "coordinates": {
             "lat": 25.789603494529825,
             "long": -80.18718123435976
@@ -212,8 +221,10 @@ Example Response Body **`200 OK`**:
 ```json
 {
     "_id": "5cbf6cfea8d0d843a08979f7",
-    "name": "Cherry Popper",
-    "foodtype": "Ice Cream",
+    "name": "Mr Whoopee",
+    "foodtypes": [
+		"Ice Cream"
+	]
     "coordinates": {
         "lat": 25.789603494529825,
         "long": -80.18718123435976
@@ -238,17 +249,16 @@ Request URL Parameters:
 - `id` (required) - Foodtruck id
 
 Request Body Parameters:
-- `name` - *String* (required)
-- `foodtype` - *String* (required)
-- `coordinates` - *Object* (required)
-	- `lat` - *Number* (required)
-	- `long` - *Number* (required)
+- Parameters from section 2.1 apply
 
 Example Request Body:
 ```json
 {
-	"name": "Cherry Popper",
-	"foodtype": "Vanilla Ice Cream",
+	"name": "Mr Whoopee",
+	"foodtypes": [
+		"Ice Cream",
+		"Vanilla Ice Cream"
+	]
 	"coordinates": {
             "lat": 25.789603494529825,
             "long": -80.18718123435976
@@ -357,7 +367,7 @@ Specific restrictions:
 - You can't add a review for your own foodtrucks, otherwise `403 FORBIDDEN` will be returned
 - You can't add more than one review per foodtruck, otherwise `403 FORBIDDEN` will be returned
 
-### 3.2 Get all reviews for foodtruck id
+### 3.2 Get all reviews for a specific foodtruck
 **[<code>GET</code> foodtrucks/reviews/get/:foodtruck_id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/reviews/get/5cbf6cfea8d0d843a08979f7)**
 
 Request URL Parameters:
@@ -383,7 +393,38 @@ Example Response Body **`200 OK`**:
 ]
 ```
 
-### 3.3 Update review `🔒`
+### 3.3 Get authenticated user's review for a specific foodtruck `🔒`
+**[<code>GET</code> foodtrucks/reviews/get/my/:foodtruck_id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/reviews/get/my/5cbf6cfea8d0d843a08979f7)**
+
+Request URL Parameters:
+- `foodtruck_id` (required) - Foodtruck id
+
+Example Response Body **`200 OK`**:
+```json
+{
+    "_id": "5cc03f80f6805c03c8996e31",
+    "created": "2019-04-24T10:50:40.920Z",
+    "lastUpdate": "2019-04-24T10:50:40.920Z",
+    "title": "Best ice cream in town",
+    "text": "Even the VCPD wants to get some :D",
+    "rating": 5,
+    "foodtruck": "5cbf6cfea8d0d843a08979f7",
+    "author": {
+        "_id": "5cbf71bea8d0d843a08979f9",
+        "username": "Lance Vance",
+        "joined": "2019-04-23T20:12:46.586Z"
+    }
+}
+```
+
+Example Response Body **`404 NOT FOUND`**:
+```json
+{
+    "message": "No review was added from your account for this foodtruck"
+}
+```
+
+### 3.4 Update review `🔒`
 **[<code>PUT</code> foodtrucks/reviews/update/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/reviews/update/5cc03f80f6805c03c8996e31)**
 
 Request URL Parameters:
@@ -414,7 +455,7 @@ Specific restrictions:
 - Parameter restrictions from section 3.1 apply
 - You must be authenticated as the author of the review in order to edit it. Otherwise, `403 FORBIDDEN` will be returned.
 
-### 3.4 Delete Review `🔒`
+### 3.5 Delete Review `🔒`
 **[<code>DELETE</code> foodtrucks/reviews/delete/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/reviews/delete/5cc03f80f6805c03c8996e31)**
 
 
@@ -423,3 +464,7 @@ Request URL Parameters:
 
 Specfic restrictions:
 - You must be authenticated as the author of the review in order to remove it. Otherwise, `403 FORBIDDEN` will be returned.
+
+## License
+
+Apache License 2.0, see the [LICENSE](LICENSE) file for details.
