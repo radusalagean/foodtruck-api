@@ -159,7 +159,7 @@ Example Request Body:
 	"name": "Mr Whoopee",
 	"foodtypes": [
 		"Ice Cream"
-	]
+	],
 	"coordinates": {
 		"lat": 25.789603494529825,
 		"long": -80.18718123435976
@@ -191,8 +191,8 @@ Example Response Body **`200 OK`**:
         "_id": "5cbf6cfea8d0d843a08979f7",
         "name": "Mr Whoopee",
         "foodtypes": [
-			"Ice Cream"
-		]
+		"Ice Cream"
+	],
         "coordinates": {
             "lat": 25.789603494529825,
             "long": -80.18718123435976
@@ -224,7 +224,7 @@ Example Response Body **`200 OK`**:
     "name": "Mr Whoopee",
     "foodtypes": [
 		"Ice Cream"
-	]
+	],
     "coordinates": {
         "lat": 25.789603494529825,
         "long": -80.18718123435976
@@ -258,7 +258,7 @@ Example Request Body:
 	"foodtypes": [
 		"Ice Cream",
 		"Vanilla Ice Cream"
-	]
+	],
 	"coordinates": {
             "lat": 25.789603494529825,
             "long": -80.18718123435976
