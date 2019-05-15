@@ -236,6 +236,7 @@ export default({ config, db }) => {
   // '/v1/foodtrucks/reviews/get/:foodtruck_id'
   api.get('/reviews/get/:foodtruck_id', (req, res) => {
     Review.find({ foodtruck: req.params.foodtruck_id })
+      .sort({ lastUpdate: -1 })
       .populate('author')
       .exec((err, reviews) => {
       if (err) {
