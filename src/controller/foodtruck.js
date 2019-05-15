@@ -253,7 +253,9 @@ export default({ config, db }) => {
     Review.findOne({
       foodtruck: req.params.foodtruck_id,
       author: req.user.id
-    }, (err, review) => {
+    })
+    .populate('author')
+    .exec((err, review) => {
       if (err) {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR)
           .json(jsonMsg('Error while requesting your review for the specified foodtruck: ' + err.toString()))
