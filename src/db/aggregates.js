@@ -68,7 +68,18 @@ function readFoodtruckAggregate(id) {
   return outputArray;
 }
 
+function readFoodtrucksAggregateByOwner(ownerId) {
+  let outputArray = readFoodtrucksAggregate.slice(0);
+  outputArray.unshift({
+    $match: {
+      owner: { $eq: ownerId }
+    }
+  });
+  return outputArray;
+}
+
 export {
   readFoodtrucksAggregate,
-  readFoodtruckAggregate
+  readFoodtruckAggregate,
+  readFoodtrucksAggregateByOwner
 }

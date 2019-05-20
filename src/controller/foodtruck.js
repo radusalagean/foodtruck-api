@@ -6,7 +6,8 @@ import {
 } from 'express';
 import {
   readFoodtrucksAggregate,
-  readFoodtruckAggregate
+  readFoodtruckAggregate,
+  readFoodtrucksAggregateByOwner
 } from '../db/aggregates';
 import {
   jsonMsg
@@ -48,6 +49,22 @@ export default({ config, db }) => {
       if (err) {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR)
           .json(jsonMsg('Error while reading foodtrucks: ' + err.toString()));
+      }
+      if (!foodtrucks) {
+        res.status(HttpStatus.NOT_FOUND).json(jsonMsg('Foodtrucks not found'));
+        return;
+      }
+      res.status(HttpStatus.OK).json(foodtrucks);
+    });
+  });
+
+  // '/v1/foodtrucks/get/my' - READ AUTHENTICATED USER'S FOODTRUCKS
+  api.get('/get/my', authenticate, (req, res) => {
+    Foodtruck.aggregate(readFoodtrucksAggregateByOwner(req.user.id)).exec((err, foodtrucks) => {
+      if (err) {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .json(jsonMsg('Error while reading foodtrucks: ' + err.toString()));
+          return;
       }
       if (!foodtrucks) {
         res.status(HttpStatus.NOT_FOUND).json(jsonMsg('Foodtrucks not found'));
@@ -249,7 +266,7 @@ export default({ config, db }) => {
   });
 
   // Get authenticated user's review for a specific foodtruck id
-  // '/v1/foodtrucks/reviews/get/own/:foodtruck_id
+  // '/v1/foodtrucks/reviews/get/my/:foodtruck_id
   api.get('/reviews/get/my/:foodtruck_id', authenticate, (req, res) => {
     Review.findOne({
       foodtruck: req.params.foodtruck_id,
