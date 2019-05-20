@@ -25,7 +25,7 @@ export default ({ config, db }) => {
   api.post('/register', (req, res) => {
     Account.findOne({
       username: {
-        $regex: new RegExp(req.body.username, 'i')
+        $regex: new RegExp('^' + req.body.username + '$', 'i')
       }
     }, (err, user) => {
       if (err) {
@@ -108,7 +108,9 @@ export default ({ config, db }) => {
 
   // '/v1/account/availability/:username'
   api.get('/availability/:username', (req, res) => {
-    Account.findOne({ username: req.params.username }, (err, user) => {
+    Account.findOne({ username: {
+      $regex : new RegExp('^' + req.params.username + '$', 'i')
+    } }, (err, user) => {
       if (err) {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR)
           .json(jsonMsg('Error while searching for the specified account: ' + err.toString()));
