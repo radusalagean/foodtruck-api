@@ -11,7 +11,7 @@ let ReviewSchema = new Schema({
   },
   text: {
     type: String,
-    required: false,
+    required: true,
     minlength: [1, 'The review content field shouldn\'t be empty'],
     maxlength: [1000, 'The review content shouldn\'t be longer than 1000 characters']
   },
