@@ -20,8 +20,6 @@ For all POST / PUT requests that have a json body provided, you need to set the 
 
 For all POST requests that involve uploading images, you need to set the `multipart/form-data` value for the `Content-Type` header.
 
-Tokens have a lifetime of 30 days, after which they will expire and a new token has to be requested through a new login call for that user. The token is reset for a user with each login call.
-
 In the documentation, certain attributes displayed with a colon in the begining (e.g. `:id`) need to be replaced with a corresponding value when you are making the call.
 
 ## 1. Accounts `👤`
@@ -211,7 +209,37 @@ Example Response Body **`200 OK`**:
 ]
 ```
 
-### 2.3 Get foodtruck by id
+### 2.3 Get authenticated user's foodtrucks `🔒`
+**[<code>GET</code> foodtrucks/get/my](https://releasetracker.app/foodtruck-api/v1/foodtrucks/get/my)**
+
+Example Response Body **`200 OK`**:
+``` json
+[
+    {
+        "_id": "5cbf6cfea8d0d843a08979f7",
+        "name": "Mr Whoopee",
+        "foodtypes": [
+		"Ice Cream"
+	],
+        "coordinates": {
+            "lat": 25.789603494529825,
+            "long": -80.18718123435976
+        },
+        "image": "foodtruck-image-5cbf6cfea8d0d843a08979f7.jpg",
+        "owner": {
+            "_id": "5cbf6c56a8d0d843a08979f5",
+            "username": "Tommy Vercetti",
+            "joined": "2019-04-23T19:49:42.375Z"
+        },
+        "created": "2019-04-23T19:52:30.072Z",
+        "lastUpdate": "2019-04-23T19:52:30.072Z",
+        "avgRating": 5,
+        "ratingCount": 1
+    }
+]
+```
+
+### 2.4 Get foodtruck by id
 **[<code>GET</code> foodtrucks/get/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/get/5cbf6cfea8d0d843a08979f7)**
 
 Request URL Parameters:
@@ -242,7 +270,7 @@ Example Response Body **`200 OK`**:
 }
 ```
 
-### 2.4 Update foodtruck `🔒`
+### 2.5 Update foodtruck `🔒`
 **[<code>PUT</code> foodtrucks/update/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/update/5cbf6cfea8d0d843a08979f7)**
 
 Request URL Parameters:
@@ -284,7 +312,7 @@ Specific restrictions:
 - Restrictions from section 2.1 apply
 - You must be authenticated as the owner of the foodtruck in order to edit it. Otherwise, `403 FORBIDDEN` will be returned.
 
-### 2.5 Delete foodtruck `🔒`
+### 2.6 Delete foodtruck `🔒`
 **[<code>DELETE</code> foodtrucks/delete/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/delete/5cbf6cfea8d0d843a08979f7)**
 
 Request URL Parameters:
@@ -300,7 +328,7 @@ Example Response Body **`200 OK`**:
 Specific restrictions:
 - You must be authenticated as the owner of the foodtruck in order to remove it. Otherwise, `403 FORBIDDEN` will be returned.
 
-### 2.6 Upload foodtruck image `🔒`
+### 2.7 Upload foodtruck image `🔒`
 **[<code>POST</code> foodtrucks/image/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/image/5cbf6cfea8d0d843a08979f7)**
 
 Request Body Parameters:
@@ -319,7 +347,7 @@ In your client app, you need to build the image url as follows:
 
 ...where `:image` is the `image` field from sections 2.2 / 2.3
 
-### 2.7 Delete foodtruck image `🔒`
+### 2.8 Delete foodtruck image `🔒`
 **[<code>DELETE</code> foodtrucks/image/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/image/5cbf6cfea8d0d843a08979f7)**
 
 Specific restrictions:
@@ -334,7 +362,7 @@ Request URL Parameters:
 
 Request Body Parameters:
 - `title` - *String* (required)
-- `text` - *String* (optional)
+- `text` - *String* (required)
 - `rating` - *Number* (required)
 
 Example Request Body:
