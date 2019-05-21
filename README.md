@@ -209,8 +209,11 @@ Example Response Body **`200 OK`**:
 ]
 ```
 
-### 2.3 Get authenticated user's foodtrucks `🔒`
-**[<code>GET</code> foodtrucks/get/my](https://releasetracker.app/foodtruck-api/v1/foodtrucks/get/my)**
+### 2.3 Get foodtrucks owned by a user
+**[<code>GET</code> foodtrucks/get/owned_by/:owner_id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/get/owned_by/5cbf6c56a8d0d843a08979f5)**
+
+Request URL Parameters:
+- `owner_id` (required) - Account id
 
 Example Response Body **`200 OK`**:
 ``` json
@@ -345,7 +348,7 @@ In your client app, you need to build the image url as follows:
 - Full size version: `https://releasetracker.app/foodtruck-api-static/foodtruck_images/:image`
 - Thumbnail (max res: 150x150): `https://releasetracker.app/foodtruck-api-static/foodtruck_images/thumbnails/:image`
 
-...where `:image` is the `image` field from sections 2.2 / 2.3
+...where `:image` is the `image` field from sections 2.2 / 2.3 / 2.4
 
 ### 2.8 Delete foodtruck image `🔒`
 **[<code>DELETE</code> foodtrucks/image/:id](https://releasetracker.app/foodtruck-api/v1/foodtrucks/image/5cbf6cfea8d0d843a08979f7)**
