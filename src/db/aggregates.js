@@ -69,10 +69,11 @@ function readFoodtruckAggregate(id) {
 }
 
 function readFoodtrucksAggregateByOwner(ownerId) {
+  let objectId = mongoose.Types.ObjectId(ownerId);
   let outputArray = readFoodtrucksAggregate.slice(0);
   outputArray.unshift({
     $match: {
-      owner: { $eq: ownerId }
+      owner: { $eq: objectId }
     }
   });
   return outputArray;

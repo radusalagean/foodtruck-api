@@ -58,9 +58,9 @@ export default({ config, db }) => {
     });
   });
 
-  // '/v1/foodtrucks/get/my' - READ AUTHENTICATED USER'S FOODTRUCKS
-  api.get('/get/my', authenticate, (req, res) => {
-    Foodtruck.aggregate(readFoodtrucksAggregateByOwner(req.user.id)).exec((err, foodtrucks) => {
+  // '/v1/foodtrucks/get/owned_by/:owner_id' - READ USER'S FOODTRUCKS
+  api.get('/get/owned_by/:owner_id', (req, res) => {
+    Foodtruck.aggregate(readFoodtrucksAggregateByOwner(req.params.owner_id)).exec((err, foodtrucks) => {
       if (err) {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR)
           .json(jsonMsg('Error while reading foodtrucks: ' + err.toString()));
