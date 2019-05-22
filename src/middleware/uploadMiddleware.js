@@ -5,7 +5,7 @@ import fs from 'fs';
 import sharp from 'sharp';
 
 const MAX_FILE_SIZE = 1024 * 1024 * 10;
-const ALLOWE_MIME_TYPES = [ 'image/jpeg', 'image/png' ];
+const ALLOWED_MIME_TYPES = [ 'image/jpeg', 'image/png', 'image/*' ];
 const PUBLIC_ROOT_DIRECTORY = 'public';
 const PUBLIC_PROFILE_IMAGES_DIRECTORY = 'profile_images';
 const PUBLIC_FOODTRUCK_IMAGES_DIRECTORY = 'foodtruck_images';
@@ -36,7 +36,7 @@ function getMulter(op) {
       fileSize: MAX_FILE_SIZE
     },
     fileFilter: (req, file, cb) => {
-      cb(null, ALLOWE_MIME_TYPES.includes(file.mimetype));
+      cb(null, ALLOWED_MIME_TYPES.includes(file.mimetype));
     }
   })
 };
