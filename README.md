@@ -127,12 +127,13 @@ Request Body Parameters:
 
 Specific restrictions:
 - Max file size is 10MB
-- Accepted MIME types: `image/jpeg`, `image/png`
+- Accepted MIME types: `image/jpeg`, `image/png`, `image/*`
 
 **Accessing profile images**
 
 In your client app, you need to build the image url as follows:
 - Full size version: `https://releasetracker.app/foodtruck-api-static/profile_images/:image`
+- Mid size version (max res: 500x500): `https://releasetracker.app/foodtruck-api-static/profile_images/500/:image`
 - Thumbnail (max res: 150x150): `https://releasetracker.app/foodtruck-api-static/profile_images/thumbnails/:image`
 
 ...where `:image` is the `image` field from the account object
@@ -346,6 +347,7 @@ Specific restrictions:
 
 In your client app, you need to build the image url as follows:
 - Full size version: `https://releasetracker.app/foodtruck-api-static/foodtruck_images/:image`
+- Mid size version (max res: 500x500): `https://releasetracker.app/foodtruck-api-static/foodtruck_images/500/:image`
 - Thumbnail (max res: 150x150): `https://releasetracker.app/foodtruck-api-static/foodtruck_images/thumbnails/:image`
 
 ...where `:image` is the `image` field from sections 2.2 / 2.3 / 2.4
