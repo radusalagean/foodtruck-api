@@ -90,7 +90,8 @@ Example Response Body **`200 OK`**:
 {
 	"_id": "5cbf71bea8d0d843a08979f8",
 	"username": "Tommy Vercetti",
-	"joined": "2019-04-23T20:12:46.586Z"
+	"joined": "2019-04-23T20:12:46.586Z",
+	"lastUpdate": "2019-04-23T20:12:46.586Z"
 }
 ```
 
@@ -105,7 +106,8 @@ Example Response Body **`200 OK`**:
 {
 	"_id": "5cbf71bea8d0d843a08979f8",
 	"username": "Tommy Vercetti",
-	"joined": "2019-04-23T20:12:46.586Z"
+	"joined": "2019-04-23T20:12:46.586Z",
+	"lastUpdate": "2019-04-23T20:12:46.586Z"
 }
 ```
 
@@ -200,7 +202,8 @@ Example Response Body **`200 OK`**:
         "owner": {
             "_id": "5cbf6c56a8d0d843a08979f5",
             "username": "Tommy Vercetti",
-            "joined": "2019-04-23T19:49:42.375Z"
+            "joined": "2019-04-23T19:49:42.375Z",
+	    "lastUpdate": "2019-04-23T19:49:42.375Z"
         },
         "created": "2019-04-23T19:52:30.072Z",
         "lastUpdate": "2019-04-23T19:52:30.072Z",
@@ -233,7 +236,8 @@ Example Response Body **`200 OK`**:
         "owner": {
             "_id": "5cbf6c56a8d0d843a08979f5",
             "username": "Tommy Vercetti",
-            "joined": "2019-04-23T19:49:42.375Z"
+            "joined": "2019-04-23T19:49:42.375Z",
+	    "lastUpdate": "2019-04-23T19:49:42.375Z"
         },
         "created": "2019-04-23T19:52:30.072Z",
         "lastUpdate": "2019-04-23T19:52:30.072Z",
@@ -265,7 +269,8 @@ Example Response Body **`200 OK`**:
     "owner": {
         "_id": "5cbf6c56a8d0d843a08979f5",
         "username": "TestUser",
-        "joined": "2019-04-23T19:49:42.375Z"
+        "joined": "2019-04-23T19:49:42.375Z",
+	"lastUpdate": "2019-04-23T19:49:42.375Z"
     },
     "created": "2019-04-23T19:52:30.072Z",
     "lastUpdate": "2019-04-23T19:52:30.072Z",
@@ -420,7 +425,8 @@ Example Response Body **`200 OK`**:
         "author": {
             "_id": "5cbf71bea8d0d843a08979f9",
             "username": "Lance Vance",
-            "joined": "2019-04-23T20:12:46.586Z"
+            "joined": "2019-04-23T20:12:46.586Z",
+	    "lastUpdate": "2019-04-23T20:12:46.586Z"
         }
     }
 ]
@@ -445,7 +451,8 @@ Example Response Body **`200 OK`**:
     "author": {
         "_id": "5cbf71bea8d0d843a08979f9",
         "username": "Lance Vance",
-        "joined": "2019-04-23T20:12:46.586Z"
+        "joined": "2019-04-23T20:12:46.586Z",
+	"lastUpdate": "2019-04-23T20:12:46.586Z"
     }
 }
 ```
