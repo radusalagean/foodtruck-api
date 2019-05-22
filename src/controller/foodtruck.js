@@ -17,6 +17,7 @@ import {
 } from '../middleware/authMiddleware';
 import {
   getFoodtruckImageUpload,
+  createFoodtruck500Image,
   createFoodtruckThumbnail,
   getFoodtruckImageName,
   removeFoodtruckImageFile,
@@ -195,6 +196,7 @@ export default({ config, db }) => {
         }
         let savedFileName = getFoodtruckImageName(foodtruckId, req.file.originalname);
         createFoodtruckThumbnail(savedFileName);
+        createFoodtruck500Image(savedFileName);
         foodtruck.image = savedFileName;
         foodtruck.save(err => {
           if (err) {

@@ -13,6 +13,7 @@ import {
 } from '../middleware/authMiddleware';
 import {
   getProfileImageUpload,
+  createProfile500Image,
   createProfileThumbnail,
   getProfileImageName,
   removeProfileImageFile,
@@ -147,6 +148,7 @@ export default ({ config, db }) => {
         }
         let savedFileName = getProfileImageName(userId, req.file.originalname);
         createProfileThumbnail(savedFileName);
+        createProfile500Image(savedFileName);
         user.image = savedFileName;
         user.save(err => {
           if (err) {

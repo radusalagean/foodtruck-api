@@ -10,6 +10,7 @@ const PUBLIC_ROOT_DIRECTORY = 'public';
 const PUBLIC_PROFILE_IMAGES_DIRECTORY = 'profile_images';
 const PUBLIC_FOODTRUCK_IMAGES_DIRECTORY = 'foodtruck_images';
 const PUBLIC_THUMBNAILS_DIRECTORY = 'thumbnails';
+const PUBLIC_500_DIRECTORY = '500';
 const PREFIX_PROFILE_IMAGE = 'profile-image-';
 const PREFIX_FOODTRUCK_IMAGE = 'foodtruck-image-';
 
@@ -81,15 +82,15 @@ function removeFile(path) {
   });
 }
 
-function createThumbnail(parentPath, fileName) {
+function createResizedImage(parentPath, containerDirectoryName, fileName, size) {
   let readPath = parentPath + '/' + fileName;
-  let savePathParent = parentPath + '/' + PUBLIC_THUMBNAILS_DIRECTORY;
+  let savePathParent = parentPath + '/' + containerDirectoryName;
   let savePath = savePathParent + '/' + fileName;
   mkdirp.sync(savePathParent);
   sharp(readPath)
     .resize({
-      width: 150,
-      height: 150,
+      width: size,
+      height: size,
       fit: sharp.fit.inside
     })
     .toFile(savePath);
@@ -107,8 +108,13 @@ function getProfileImageUpload() {
 }
 
 // EXPORT
+function createProfile500Image(fileName) {
+  createResizedImage(PUBLIC_ROOT_DIRECTORY + '/' + PUBLIC_PROFILE_IMAGES_DIRECTORY, PUBLIC_500_DIRECTORY, fileName, 500);
+}
+
+// EXPORT
 function createProfileThumbnail(fileName) {
-  createThumbnail(PUBLIC_ROOT_DIRECTORY + '/' + PUBLIC_PROFILE_IMAGES_DIRECTORY, fileName);
+  createResizedImage(PUBLIC_ROOT_DIRECTORY + '/' + PUBLIC_PROFILE_IMAGES_DIRECTORY, PUBLIC_THUMBNAILS_DIRECTORY, fileName, 150);
 }
 
 // EXPORT
@@ -122,8 +128,10 @@ function removeProfileImageFile(fileName) {
   let pathParent = PUBLIC_ROOT_DIRECTORY + '/' + PUBLIC_PROFILE_IMAGES_DIRECTORY;
   let path = pathParent + '/' + fileName;
   let thumbPath = pathParent + '/' + PUBLIC_THUMBNAILS_DIRECTORY + '/' + fileName;
+  let fiveHundredPath = pathParent + '/' + PUBLIC_500_DIRECTORY + '/' + fileName;
   removeFile(path);
   removeFile(thumbPath);
+  removeFile(fiveHundredPath);
 }
 
 // EXPORT
@@ -132,8 +140,13 @@ function getFoodtruckImageUpload() {
 }
 
 // EXPORT
+function createFoodtruck500Image(fileName) {
+  createResizedImage(PUBLIC_ROOT_DIRECTORY + '/' + PUBLIC_FOODTRUCK_IMAGES_DIRECTORY, PUBLIC_500_DIRECTORY, fileName, 500);
+}
+
+// EXPORT
 function createFoodtruckThumbnail(fileName) {
-  createThumbnail(PUBLIC_ROOT_DIRECTORY + '/' + PUBLIC_FOODTRUCK_IMAGES_DIRECTORY, fileName);
+  createResizedImage(PUBLIC_ROOT_DIRECTORY + '/' + PUBLIC_FOODTRUCK_IMAGES_DIRECTORY, PUBLIC_THUMBNAILS_DIRECTORY, fileName, 150);
 }
 
 // EXPORT
@@ -147,19 +160,23 @@ function removeFoodtruckImageFile(fileName) {
   let pathParent = PUBLIC_ROOT_DIRECTORY + '/' + PUBLIC_FOODTRUCK_IMAGES_DIRECTORY;
   let path = pathParent + '/' + fileName;
   let thumbPath = pathParent + '/' + PUBLIC_THUMBNAILS_DIRECTORY + '/' + fileName;
+  let fiveHundredPath = pathParent + '/' + PUBLIC_500_DIRECTORY + '/' + fileName;
   removeFile(path);
   removeFile(thumbPath);
+  removeFile(fiveHundredPath);
 }
 
 module.exports = {
   PUBLIC_ROOT_DIRECTORY,
   // Profile Image Upload
   getProfileImageUpload,
+  createProfile500Image,
   createProfileThumbnail,
   getProfileImageName,
   removeProfileImageFile,
   // Foodtruck Image Upload
   getFoodtruckImageUpload,
+  createFoodtruck500Image,
   createFoodtruckThumbnail,
   getFoodtruckImageName,
   removeFoodtruckImageFile
