@@ -10,6 +10,11 @@ let Account = new Schema({
     type: Date,
     required: true,
     default: Date.now
+  },
+  lastUpdate: {
+    type: Date,
+    required: true,
+    default: Date.now
   }
 }, {
   versionKey: false

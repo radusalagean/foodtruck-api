@@ -198,6 +198,7 @@ export default({ config, db }) => {
         createFoodtruckThumbnail(savedFileName);
         createFoodtruck500Image(savedFileName);
         foodtruck.image = savedFileName;
+        foodtruck.lastUpdate = Date.now();
         foodtruck.save(err => {
           if (err) {
             res.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -240,6 +241,7 @@ export default({ config, db }) => {
       }
       removeFoodtruckImageFile(foodtruck.image);
       foodtruck.image = undefined;
+      foodtruck.lastUpdate = Date.now();
       foodtruck.save(err => {
         if (err) {
           res.status(HttpStatus.INTERNAL_SERVER_ERROR)

@@ -150,6 +150,7 @@ export default ({ config, db }) => {
         createProfileThumbnail(savedFileName);
         createProfile500Image(savedFileName);
         user.image = savedFileName;
+        user.lastUpdate = Date.now();
         user.save(err => {
           if (err) {
             res.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -186,6 +187,7 @@ export default ({ config, db }) => {
       }
       removeProfileImageFile(user.image);
       user.image = undefined;
+      user.lastUpdate = Date.now();
       user.save(err => {
         if (err) {
           res.status(HttpStatus.INTERNAL_SERVER_ERROR)
