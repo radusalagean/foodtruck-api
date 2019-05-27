@@ -34,13 +34,13 @@ export default({ config, db }) => {
     newFoodtruck.coordinates.lat = req.body.coordinates.lat;
     newFoodtruck.coordinates.long = req.body.coordinates.long;
     newFoodtruck.owner = req.user.id;
-    newFoodtruck.save(err => {
+    newFoodtruck.save((err, foodtruck) => {
       if (err) {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR)
           .json(jsonMsg('Error while saving foodtruck: ' + err.toString()));
         return;
       }
-      res.status(HttpStatus.CREATED).json(jsonMsg('Foodtruck saved successfully'));
+      res.status(HttpStatus.CREATED).json({ _id: foodtruck._id });
     });
   });
 
