@@ -183,6 +183,9 @@ export default({ config, db }) => {
           .json(jsonMsg('You must be the owner of this foodtruck in order to associate an image with it'));
         return;
       }
+      if (foodtruck.image) {
+        removeFoodtruckImageFile(foodtruck.image);
+      }
       upload(req, res, err => {
         if (err) {
           res.status(HttpStatus.INTERNAL_SERVER_ERROR)

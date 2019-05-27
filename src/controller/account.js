@@ -135,6 +135,9 @@ export default ({ config, db }) => {
         res.status(HttpStatus.NOT_FOUND).json(jsonMsg('User id not found'));
         return;
       }
+      if (user.image) {
+        removeProfileImageFile(user.image);
+      }
       upload(req, res, err => {
         if (err) {
           res.status(HttpStatus.INTERNAL_SERVER_ERROR)
