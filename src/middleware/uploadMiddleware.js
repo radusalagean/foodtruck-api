@@ -4,7 +4,7 @@ import mkdirp from 'mkdirp';
 import fs from 'fs';
 import sharp from 'sharp';
 
-const MAX_FILE_SIZE = 1024 * 1024 * 10;
+const MAX_FILE_SIZE = 1024 * 1024 * 6;
 const ALLOWED_MIME_TYPES = [ 'image/jpeg', 'image/png', 'image/*' ];
 const PUBLIC_ROOT_DIRECTORY = 'public';
 const PUBLIC_PROFILE_IMAGES_DIRECTORY = 'profile_images';
