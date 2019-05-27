@@ -344,7 +344,7 @@ Request Body Parameters:
 - `image` - *File* (required) - Image file
 
 Specific restrictions:
-- Max file size is 10MB
+- Max file size is 6MB
 - Accepted MIME types: `image/jpeg`, `image/png`
 - You must be authenticated as the owner of the foodtruck in order to upload an image for it. Otherwise, `403 FORBIDDEN` will be returned.
 
