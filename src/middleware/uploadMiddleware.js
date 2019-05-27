@@ -87,6 +87,7 @@ function createResizedImage(parentPath, containerDirectoryName, fileName, size) 
   let savePathParent = parentPath + '/' + containerDirectoryName;
   let savePath = savePathParent + '/' + fileName;
   mkdirp.sync(savePathParent);
+  sharp.cache(false);
   sharp(readPath)
     .resize({
       width: size,
