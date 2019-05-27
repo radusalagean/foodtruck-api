@@ -170,13 +170,13 @@ Example Request Body:
 Example Response Body **`201 CREATED`**:
 ```json
 {
-	"message": "Foodtruck saved successfully"
+	"_id": "5cbf6cfea8d0d843a08979f7"
 }
 ```
 
 Specific restrictions:
 - `name` max length: 100 characters
-- `foodtypes':
+- `foodtypes`:
 	- min array size: 1
 	- max array size: 10
 	- min item length: 1
