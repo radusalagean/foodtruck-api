@@ -128,7 +128,7 @@ Request Body Parameters:
 - `image` - *File* (required) - Image file
 
 Specific restrictions:
-- Max file size is 10MB
+- Max file size is 6MB
 - Accepted MIME types: `image/jpeg`, `image/png`, `image/*`
 
 **Accessing profile images**
