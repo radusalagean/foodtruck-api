@@ -1,8 +1,8 @@
 {
   "name": "foodtruck-api",
-  "version": "0.0.1",
-  "description": "Node.js API from https://www.udemy.com/api-development",
-  "main": "dist",
+  "version": "1.0.0",
+  "description": "Node.js API inspired from https://www.udemy.com/api-development",
+  "main": "foodtruck-api",
   "scripts": {
     "dev": "SET NODE_ENV=development & nodemon -w src --exec \"babel-node src --presets es2015,stage-0\"",
     "build": "babel src -s -D -d dist --presets es2015,stage-0",
