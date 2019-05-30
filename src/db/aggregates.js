@@ -54,6 +54,11 @@ const readFoodtrucksAggregate = [
         salt: false
       }
     }
+  },
+  {
+    $sort: {
+      created: -1
+    }
   }
 ];
 
