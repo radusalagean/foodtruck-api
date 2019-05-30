@@ -5,8 +5,8 @@
   "main": "foodtruck-api",
   "scripts": {
     "dev": "SET NODE_ENV=development & nodemon -w src --exec \"babel-node src --presets es2015,stage-0\"",
-    "build": "babel src -s -D -d dist --presets es2015,stage-0",
-    "start": "NODE_ENV=production pm2 start dist",
+    "build": "babel src -s -D -d foodtruck-api-dist --presets es2015,stage-0",
+    "start": "NODE_ENV=production pm2 start foodtruck-api-dist",
     "prestart": "npm run -s build",
     "lint": "eslint src",
     "test": "echo \"Error: no test specified\" && exit 1"
