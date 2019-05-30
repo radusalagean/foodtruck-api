@@ -44,6 +44,7 @@ Example Response Body **`201 CREATED`**:
 }
 ```
 Specific restrictions:
+- Max username length: 50 characters
 - Usernames must be unique (otherwise, `409 CONFLICT` will be returned)
 - Usernames are considered unique on a case insensitive basis (e.g. if `Tommy Vercetti` is registered, trying to register `tommy vercetti` will result in a conflict error)
 - Note: spaces are allowed in usernames
