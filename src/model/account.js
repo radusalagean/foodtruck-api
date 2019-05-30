@@ -3,8 +3,15 @@ const Schema = mongoose.Schema;
 import passportLocalMongoose from 'passport-local-mongoose';
 
 let Account = new Schema({
-  username: String,
-  password: String,
+  username: {
+    type: String,
+    required: true,
+    maxlength: 50
+  },
+  password: {
+    type: String,
+    select: false
+  },
   image: String,
   joined: {
     type: Date,
