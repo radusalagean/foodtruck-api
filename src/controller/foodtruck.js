@@ -314,7 +314,10 @@ export default({ config, db }) => {
           .json(jsonMsg('You cannot review your own foodtruck'));
         return;
       }
-      Review.findOne({ author: req.user.id }, (err, review) => {
+      Review.findOne({ 
+        foodtruck: req.params.foodtruck_id,
+        author: req.user.id 
+      }, (err, review) => {
         if (err) {
           res.status(HttpStatus.INTERNAL_SERVER_ERROR)
             .json(jsonMsg('Error while verifying author eligibility: ' + err.toString()));
