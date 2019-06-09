@@ -8,8 +8,7 @@
     "build": "babel src -s -D -d foodtruck-api-dist --presets es2015,stage-0",
     "start": "NODE_ENV=production pm2 start foodtruck-api-dist",
     "prestart": "npm run -s build",
-    "lint": "eslint src",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint src"
   },
   "eslintConfig": {
     "parserOptions": {

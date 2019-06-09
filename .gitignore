@@ -61,7 +61,10 @@ typings/
 .next
 
 # generated files
-dist/
+*dist/
 
 # Public directory
 public/
+
+# auto generated package-lock.json
+package-lock.json
