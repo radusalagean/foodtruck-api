@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/radusalagean/foodtruck-api.svg?branch=master)](https://travis-ci.org/radusalagean/foodtruck-api)
+
 # foodtruck-api
 Node.js API based on the one presented in https://www.udemy.com/api-development.
 
