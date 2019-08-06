@@ -34,6 +34,11 @@ export default ({ config, db }) => {
           .json(jsonMsg('Error while searching for the specified account: ' + err.toString()));
         return;
       }
+      if (req.body.serviceAccessCode != process.env.SERVICE_ACCESS_CODE) {
+        res.status(HttpStatus.BAD_REQUEST)
+          .json(jsonMsg('Invalid service access code'));
+        return;
+      }
       if (user) {
         res.status(HttpStatus.CONFLICT)
           .json(jsonMsg('The username already exists'));
