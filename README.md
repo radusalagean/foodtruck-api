@@ -1,3 +1,5 @@
+**Update October 14, 2020:** Both the server and the client app are now retired. Feel free to use the sources if you want to deploy your own server-client configuration of this project.
+
 [![Build Status](https://travis-ci.org/radusalagean/foodtruck-api.svg?branch=master)](https://travis-ci.org/radusalagean/foodtruck-api)
 
 # foodtruck-api
